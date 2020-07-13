@@ -16,6 +16,10 @@ public class GameDetail extends MainComponent {
         super(driver);
     }
 
+    public String getGameHeader() {
+        return gameNameHeader.getText();
+    }
+
     @Override
     public boolean isDisplayed() {
         return wait.until((driver -> this.gameNameHeader.isDisplayed()));

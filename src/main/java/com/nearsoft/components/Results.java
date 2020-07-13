@@ -1,9 +1,10 @@
 package com.nearsoft.components;
 
-import com.sun.tools.javac.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class Results extends MainComponent {
 
@@ -15,11 +16,11 @@ public class Results extends MainComponent {
     }
 
     public void clickGameByIndex(int index) {
-        this.suggestions.get(index - 1).click();
+        suggestions.get(index - 1).click();
     }
 
     @Override
     public boolean isDisplayed() {
-        return this.wait.until((driver) -> this.suggestions.size() > 0);
+        return this.wait.until((driver) -> suggestions.size() > 0);
     }
 }
