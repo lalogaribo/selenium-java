@@ -2,7 +2,9 @@ package com.nearsoft.tests.steam;
 
 import com.nearsoft.pages.SteamMainPage;
 import com.nearsoft.tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SearchGameTest extends BaseTest {
@@ -14,9 +16,19 @@ public class SearchGameTest extends BaseTest {
         this.steamMainPage = new SteamMainPage(driver);
     }
 
-    @Test
-    public void searchGame() {
+    @Test(dataProvider = "gameData")
+    public void searchGame(String keyword) {
         steamMainPage.goTo();
-        steamMainPage.getSearchBar().enterSearch("portal");
+        steamMainPage.getSearchBar().enterSearch(keyword);
+        Assert.assertTrue(steamMainPage.getSearchBar().isDisplayed());
+        Assert.assertTrue(steamMainPage.getSearchBar().getSearchInput().equals(keyword));
+    }
+
+    @DataProvider
+    public Object[][] gameData() {
+        return new Object[][]{
+                {"portal"},
+                {"Age of empires"}
+        };
     }
 }

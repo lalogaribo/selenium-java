@@ -14,12 +14,16 @@ public class SearchBar extends MainComponent {
     }
 
     public void enterSearch(String keyword) {
-        this.searchBox.clear();
-        this.searchBox.sendKeys(keyword);
+        searchBox.clear();
+        searchBox.sendKeys(keyword);
+    }
+
+    public String getSearchInput() {
+        return searchBox.getAttribute("value");
     }
 
     @Override
     public boolean isDisplayed() {
-        return this.wait.until((driver) -> this.searchBox.isDisplayed());
+        return this.wait.until((driver) -> searchBox.isDisplayed());
     }
 }

@@ -13,6 +13,7 @@ public class SteamMainPage {
     public SteamMainPage(WebDriver driver) {
         this.driver = driver;
         this.searchBar = PageFactory.initElements(driver, SearchBar.class);
+//        this.results = PageFactory.initElements(driver, Results.class);
     }
 
     public void goTo() {
@@ -23,7 +24,7 @@ public class SteamMainPage {
         return this.searchBar;
     }
 
-//    public Results getResults() {
-//        return this.results;
-//    }
+    public Results getResults() {
+        return this.results;
+    }
 }
