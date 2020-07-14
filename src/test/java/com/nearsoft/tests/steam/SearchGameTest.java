@@ -15,32 +15,33 @@ public class SearchGameTest extends BaseTest {
 
     @BeforeTest
     public void pagesSetup() {
-
         this.steamMainPage = new SteamMainPage(driver);
         this.gameDetail = new GameDetailPage(driver);
     }
 
     @Test(dataProvider = "gameData")
-    public void searchGame(String keyword) {
+    public void searchGame(String keyword, String genre, String developer, String publisher) {
         steamMainPage.goTo();
         Assert.assertTrue(steamMainPage.getSearchBar().isDisplayed());
-
         steamMainPage.getSearchBar().enterSearch(keyword);
         Assert.assertTrue(steamMainPage.getSearchBar().getSearchInput().equals(keyword));
         Assert.assertTrue(steamMainPage.getResults().isDisplayed());
         steamMainPage.getResults().clickGameByIndex(1);
         Assert.assertTrue(gameDetail.getGameDetail().isDisplayed());
         Assert.assertEquals(keyword, gameDetail.getGameDetail().getGameHeader());
-
-
+        Assert.assertTrue(gameDetail.getGameDetail().gameDetailsIsDisplayed());
+        js.executeScript("arguments[0].scrollIntoView();", gameDetail.getGameDetail().gameDetailsBlock);
+        Assert.assertEquals(genre, gameDetail.getGameDetail().getGenre(genre));
+        Assert.assertEquals(developer, gameDetail.getGameDetail().getDeveloperName(developer));
+        Assert.assertEquals(publisher, gameDetail.getGameDetail().getPublisher(publisher));
 
     }
 
     @DataProvider
     public Object[][] gameData() {
         return new Object[][]{
-                {"Portal 2"},
-                {"Age of Empires II: Definitive Edition"}
+                {"Portal 2", "Action", "Valve", "Valve"},
+                {"Age of Empires II: Definitive Edition", "Strategy", "Forgotten Empires", "Xbox Game Studios"}
         };
     }
 }
