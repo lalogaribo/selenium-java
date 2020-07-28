@@ -20,13 +20,13 @@ public class SearchGameTest extends BaseTest {
     }
 
     @Test(dataProvider = "gameData")
-    public void searchGame(String keyword, String genre, String developer, String publisher) {
+    public void searchGame(String keyword, String genre, String developer, String publisher, int index) {
         steamMainPage.goTo();
         Assert.assertTrue(steamMainPage.getSearchBar().isDisplayed());
         steamMainPage.getSearchBar().enterSearch(keyword);
         Assert.assertTrue(steamMainPage.getSearchBar().getSearchInput().equals(keyword));
         Assert.assertTrue(steamMainPage.getResults().isDisplayed());
-        steamMainPage.getResults().clickGameByIndex(1);
+        steamMainPage.getResults().clickGameByIndex(index);
         Assert.assertTrue(gameDetail.getGameDetail().isDisplayed());
         Assert.assertEquals(keyword, gameDetail.getGameDetail().getGameHeader());
         Assert.assertTrue(gameDetail.getGameDetail().gameDetailsIsDisplayed());
@@ -34,14 +34,13 @@ public class SearchGameTest extends BaseTest {
         Assert.assertEquals(genre, gameDetail.getGameDetail().getGenre(genre));
         Assert.assertEquals(developer, gameDetail.getGameDetail().getDeveloperName(developer));
         Assert.assertEquals(publisher, gameDetail.getGameDetail().getPublisher(publisher));
-
     }
 
     @DataProvider
     public Object[][] gameData() {
         return new Object[][]{
-                {"Portal 2", "Action", "Valve", "Valve"},
-                {"Age of Empires II: Definitive Edition", "Strategy", "Forgotten Empires", "Xbox Game Studios"}
+                {"Portal 2", "Action", "Valve", "Valve", 1},
+                {"Age of Empires II: Definitive Edition", "Strategy", "Forgotten Empires", "Xbox Game Studios", 1}
         };
     }
 }

@@ -12,5 +12,6 @@ public abstract class MainComponent {
         PageFactory.initElements(driver, this);
     }
 
+
     public abstract boolean isDisplayed();
 }
