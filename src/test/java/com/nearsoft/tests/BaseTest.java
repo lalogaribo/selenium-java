@@ -5,8 +5,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +14,7 @@ public class BaseTest {
     protected WebDriver driver;
     protected JavascriptExecutor js;
 
-    @BeforeTest
+    @BeforeSuite
     public void driverSetup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -23,7 +23,7 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterTest
+    @AfterSuite
     public void tearDown() {
         Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
         driver.close();

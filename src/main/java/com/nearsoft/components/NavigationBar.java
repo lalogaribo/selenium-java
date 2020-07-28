@@ -14,6 +14,9 @@ public class NavigationBar extends MainComponent {
     @FindBy(id = "genre_tab")
     private WebElement browseOption;
 
+    @FindBy(xpath = "//a[.='login']")
+    private WebElement loginOption;
+
     public NavigationBar(WebDriver driver) {
         super(driver);
     }
@@ -24,6 +27,10 @@ public class NavigationBar extends MainComponent {
 
     public void goToBrowse() {
         this.browseOption.click();
+    }
+
+    public void clickLogin() {
+        loginOption.click();
     }
 
     @Override
